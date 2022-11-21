@@ -3,6 +3,7 @@ let mapleader = " "
 "configuracion de tecla leader y utilerias de init.vim
 "reinicia nvim cargando el archivo de configuracion
 nmap     <F5> :source ~\AppData\Local\nvim\init.vim<CR>
+nmap     <F12>:syntax sync fromstart<CR>
 "abre el archivo de configuracion
 nnoremap <leader>e :e ~\appdata\local\nvim\init.vim<cr>
 
@@ -56,6 +57,9 @@ call plug#begin('~\AppData\Local\nvim-data\site\autoload')
     Plug 'scrooloose/syntastic'
     Plug 'vim-airline/vim-airline'
     Plug 'shirk/vim-gas'
+    Plug 'sheerun/vim-polyglot'
+    Plug 'ryanoasis/vim-devicons'
+    Plug 'dracula/vim', { 'name': 'dracula' }
 call plug#end()
 set runtimepath+=~/.vim/nvim/syntax
 
@@ -65,8 +69,14 @@ nnoremap <C-f> :NERDTreeFind  <CR>
 
 "Color Theme
 set background=dark
-let g:gruvbox_contrast_dark='hard'
-colorscheme gruvbox
+let theme = 'dracula'
+
+if (theme == 'gruvbox')
+    colorscheme gruvbox
+    let g:gruvbox_contrast_dark='hard'
+elseif (theme == 'dracula')
+    colorscheme dracula
+endif
 
 "syntax setings
 syntax on
