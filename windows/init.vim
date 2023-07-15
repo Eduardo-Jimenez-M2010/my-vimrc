@@ -1,3 +1,6 @@
+"windows version
+
+
 call plug#begin()
 Plug 'eagletmt/neco-ghc'
 Plug 'drewtempelmeyer/palenight.vim'
