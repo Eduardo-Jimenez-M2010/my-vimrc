@@ -30,6 +30,14 @@ nnoremap <leader>q :q<CR>
 nnoremap <leader>e :e ~\AppData\Local\nvim\init.vim<CR>
 nmap     <F5> :source ~\AppData\Local\nvim\init.vim<CR>
 
+" Setting scrolling keymap
+nnoremap <C-j> <nop>
+nnoremap <C-k> <nop>
+nnoremap <C-j> 2<C-e>
+nnoremap <C-k> 2<C-y>
+
+
+
 "NERDTree plugin
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind  <CR>
@@ -40,6 +48,7 @@ let g:rainbow_active = 1
 set runtimepath+=~/.config/nvim/syntax
 
 " Theme
+
 let theme = 'gruvbox'
 if (theme == 'gruvbox')
     let g:bruvbox_contrast_dark='hard'
