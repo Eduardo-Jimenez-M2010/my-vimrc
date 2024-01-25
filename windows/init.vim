@@ -1,12 +1,13 @@
 "windows version
 
-
+" plugin list {{{
 call plug#begin()
-Plug 'eagletmt/neco-ghc'
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'morhetz/gruvbox'
-Plug 'vim-airline/vim-airline'
-Plug 'wlangstroth/vim-racket'
+Plug 'agude/vim-eldar'   " eldar theme
+Plug 'eagletmt/neco-ghc' " haskell completion
+Plug 'drewtempelmeyer/palenight.vim' " palenight theme
+Plug 'morhetz/gruvbox'               " gruvbox theme
+Plug 'vim-airline/vim-airline'       " bottom status line
+Plug 'wlangstroth/vim-racket'        " 
 Plug 'sheerun/vim-polyglot'
 Plug 'rust-lang/rust.vim'
 Plug 'preservim/tagbar'
@@ -22,8 +23,11 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'scrooloose/nerdtree'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag':'0.1.0' }
+Plug 'alvan/vim-closetag'
+Plug 'alpaca-tc/vim-endwise'
+Plug 'tmsvg/pear-tree'
 call plug#end()
-
+" }}}
 let mapleader = " "
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
@@ -48,6 +52,14 @@ let g:rainbow_active = 1
 set runtimepath+=~/.config/nvim/syntax
 
 " Theme
+" - gruvbox
+" - palenight
+" - habamax
+" - murphy
+" - evening
+" - lunaperche
+" - slate
+" - torte
 
 let theme = 'gruvbox'
 if (theme == 'gruvbox')
@@ -55,9 +67,24 @@ if (theme == 'gruvbox')
     colorscheme gruvbox
 elseif (theme == 'palenight')
     colorscheme palenight
+elseif (theme == 'eldar')
+        let g:eldar_term_red     = "#ff0000"
+        let g:eldar_term_yellow  = "#ffff00"
+        let g:eldar_term_green   = "#00ff00"
+        let g:eldar_term_cyan    = "#00ffff"
+        let g:eldar_term_blue    = "#0000ff"
+        let g:eldar_term_magenta = "#00ffff"
+        let g:eldar_term_text       = "#ffffff"
+        let g:eldar_term_background = "#000000"
+
+        syntax enable
+        silent! colorscheme eldar
+else
+    colorscheme murphy
 endif
 "set termguicolors
 set cursorline
+set guicursor=n-v-c-i:block
 
 "Telescope key bendings
 nnoremap <leader>ff <cmd>Telescope find_files<CR>
@@ -105,7 +132,7 @@ vmap <c-c> <esc>
 omap <c-c> <esc>
 
 " Syntax highlighting
-syntax on
+"syntax on
 
 " Clipboard
 set clipboard=unnamedplus
@@ -186,7 +213,7 @@ augroup END
  au Syntax jflex    so ~/.vim/syntax/jflex.vim
 
  " Mouse support
- set mouse=a
+" set mouse=a
 
  " Map F8 to Tagbar
  nmap <F8> :TagbarToggle<CR>
@@ -355,3 +382,9 @@ let g:lightline = {
 	\ }
 
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
+" Disable haskell-vim omnifunc
+let g:haskellmode_completion_ghc = 0
+autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+
+let g:ycm_semantic_triggers = {'haskell' : ['.']}
